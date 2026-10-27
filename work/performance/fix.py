@@ -1,0 +1,4 @@
+from pathlib import Path
+p=Path('work/apex/dist/experience.js');s=p.read_text().replace("e.currentTarget.textContent=locked?'UNLOCK REVEAL ↗':'LOCK REVEAL ↗'};", "e.currentTarget.textContent=locked?'UNLOCK REVEAL ↗':'LOCK REVEAL ↗';if(locked&&initializeTrail){trail.forEach(p=>p.set(.5*host.clientWidth/host.clientHeight,.5,1));initializeTrail=false}wake()};");p.write_text(s)
+p=Path('work/apex/dist/pages.css');s=p.read_text().replace('.side-nav.open{display:flex;','.side-nav.open{display:flex;flex-direction:column;');p.write_text(s)
+p=Path('work/package-dark.py');s=p.read_text().replace("'centered.css','README.txt'","'centered.css','pages.css','navigation.js','work.html','about.html','tools.html','contact.html','README.txt'").replace("'RoomEnvironment.js',",'').replace("'mclaren-p1.json','mclaren-p1.bin.gz'","'mclaren-fast.json','mclaren-fast.bin.gz'");s=s.replace("for f in dst.rglob('*'):","for f in dst.rglob('*'):");p.write_text(s)

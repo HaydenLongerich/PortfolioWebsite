@@ -1,0 +1,56 @@
+{
+  "source": "assets/Hayden-Longerich-Resume.pdf",
+  "groups": [
+    {
+      "name": "Languages",
+      "tools": [
+        "TypeScript",
+        "JavaScript",
+        "Python",
+        "Java",
+        "C",
+        "C++",
+        "SQL"
+      ]
+    },
+    {
+      "name": "Frontend",
+      "tools": [
+        "React",
+        "Next.js",
+        "Tailwind CSS",
+        "HTML",
+        "CSS",
+        "JavaFX"
+      ]
+    },
+    {
+      "name": "Backend & data",
+      "tools": [
+        "Node.js",
+        "Supabase",
+        "requests"
+      ]
+    },
+    {
+      "name": "Developer tools",
+      "tools": [
+        "Git",
+        "VS Code",
+        "IntelliJ IDEA",
+        "CLion"
+      ]
+    },
+    {
+      "name": "AI & automation",
+      "tools": [
+        "Claude",
+        "Excel",
+        "VBA"
+      ]
+    }
+  ],
+  "additional_confirmed_usage": {
+    "Codex": "Explicitly requested by user; used throughout this portfolio build."
+  }
+}

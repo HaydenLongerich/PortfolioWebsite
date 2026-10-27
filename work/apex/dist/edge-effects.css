@@ -1,0 +1,7 @@
+:root{--edge-green:#414145;--edge-line:#414145;--edge-light:#D2FF00}
+.edge-positioned{position:relative}.edge-surface{isolation:isolate;border:1px solid var(--edge-line)!important;box-shadow:none}
+.edge-surface>.edge-trace{position:absolute;inset:0;display:block;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:3;opacity:0;visibility:hidden;transition:opacity .16s linear,visibility .16s linear;filter:drop-shadow(0 0 3px #EAEAEA) drop-shadow(0 0 8px #D2FF00AA)}
+.edge-trace rect{fill:none;stroke:var(--segment-color);stroke-opacity:var(--segment-alpha);stroke-width:3.2;stroke-linecap:round;vector-effect:non-scaling-stroke;animation:none!important}
+.edge-surface.edge-hover>.edge-trace{opacity:1;visibility:visible}.edge-surface.edge-hover{border-color:#D2FF00!important;box-shadow:inset 0 0 0 2px #D2FF00,0 0 0 1px #D2FF0022,0 0 17px #D2FF004D}.edge-surface:focus-visible{outline:2px solid #EAEAEA;outline-offset:4px}
+.modal-links a{padding:8px 13px;border-radius:10px;background:#19191B}.tool-cells{gap:2px}.tooling-filters button{padding:5px 8px}#closeModal{width:38px;height:38px;border-radius:50%;padding:0;background:#19191B;display:grid;place-items:center}
+@media(prefers-reduced-motion:reduce){.edge-surface>.edge-trace{display:none;filter:none;transition:none}.edge-surface.edge-hover{border-color:#D2FF00!important}}

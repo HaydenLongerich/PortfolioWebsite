@@ -1,0 +1,6 @@
+arguson.svg — https://cdn.prod.website-files.com/640a211ea01d26282d9635da/6463ea941262ec6b4daa09a1_Arguson_Logo_Primary.svg
+coldhaus.svg — https://cdn.prod.website-files.com/692f1c5e527fe1d22979702c/692f1fa12336625ae57adb6d_logo.svg
+windsor.svg — https://www.uwindsor.ca/sites/all/themes/uwindsor_bootstrap/images/uwindsor_logo.svg
+boswin.png — https://www.iboswin.com/web/wp-content/uploads/2025/06/boswinroboticslogo-transparent-300x125.png
+Boswin emblem: user-supplied image, exterior background removed using built-in image editing; internal white figure preserved
+Dark SVG variants: original vector paths and colours preserved, dark wordmark lettering changed to light for contrast

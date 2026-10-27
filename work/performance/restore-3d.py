@@ -1,0 +1,8 @@
+from pathlib import Path
+import re
+p=Path('work/apex/dist/lego-car.js');s=p.read_text(encoding='utf-8').replace("from 'three'","from './assets/three.module.js'").replace('mclaren-fast','mclaren-realtime').replace('side:T.DoubleSide','side:T.DoubleSide,forceSinglePass:true');p.write_text(s,encoding='utf-8')
+p=Path('work/apex/dist/index.html');s=p.read_text(encoding='utf-8');s=re.sub(r'<img class="car-still"[^>]*>','',s);s=re.sub(r'<div class="car-cutaway"[^>]*>\s*</div>','',s);s=s.replace('max="71.99"','max="359.99"').replace('image-reveal.js?v=studio4" defer','experience.js?v=realtime5" type="module"');s=s.replace('Shift and arrow keys move the reveal.','Up and down arrows tilt the car.');s=s.replace('PREPARING THE STUDIO','LOADING THE 3D BUILD');p.write_text(s,encoding='utf-8')
+for p in Path('work/apex/dist').glob('*.html'):
+ s=p.read_text(encoding='utf-8').replace('pages.css?v=studio4','pages.css?v=realtime5');p.write_text(s,encoding='utf-8')
+p=Path('work/apex/dist/experience.js');s=p.read_text(encoding='utf-8').replace('retry.onclick=()=>location.reload();start();',"retry.onclick=()=>location.reload();const loaderObserver=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){loaderObserver.disconnect();start()}},{rootMargin:'250px'});loaderObserver.observe(host);");p.write_text(s,encoding='utf-8')
+p=Path('work/package-dark.py');s=p.read_text().replace("'image-reveal.js'","'experience.js','lego-car.js'");s=s.replace("'LDRAW-CREDITS.txt'","'mclaren-realtime.json','mclaren-realtime.bin.gz','three.module.js','three.core.js','THREE-LICENSE.txt','LDRAW-CREDITS.txt'");s='\n'.join(line for line in s.splitlines() if not line.startswith('files += ['));p.write_text(s)

@@ -1,0 +1,8 @@
+from pathlib import Path
+import re
+root=Path('work/apex/dist')
+p=root/'index.html';s=p.read_text();s=re.sub(r'<script type="importmap">.*?</script>','',s);s=s.replace('role="img" aria-label="Interactive LEGO Technic McLaren P1. Move to reveal the chassis, drag to rotate, or use the arrow keys."','role="group" aria-label="Interactive LEGO McLaren cutaway. Move or tap to reveal the chassis. Use arrow keys when focused to explore."')
+s=s.replace('></div><div class="hero-loading">ASSEMBLING THE DETAILS...</div>', '><img class="car-still" src="assets/car-exterior.webp" width="1440" height="900" loading="lazy" decoding="async" alt="Yellow LEGO Technic McLaren P1"><div class="car-cutaway" aria-hidden="true"><img class="car-still" src="assets/car-interior.webp" width="1440" height="900" loading="lazy" decoding="async" alt=""></div></div>')
+s=re.sub(r'<div class="view-presets".*?</div>', '<div class="view-presets" aria-label="Car layers"><button data-layer="explore" aria-pressed="true">Explore</button><button data-layer="interior" aria-pressed="false">Full chassis</button><button data-layer="exterior" aria-pressed="false">Exterior</button></div>',s)
+s=s.replace('PREPARING THE BUILD','MOVE OR TAP TO LOOK UNDERNEATH').replace('RESET VIEW ↺','RESET ↺');s=s.replace('navigation.js"','navigation.js?v=stills2"');p.write_text(s)
+p=root/'navigation.js';s=p.read_text();start=s.index('const model=');end=s.index("document.querySelectorAll('[data-filter]')",start);s=s[:start]+"if(document.querySelector('#carViewport'))import('./image-reveal.js');\n"+s[end:];s=s[:s.index('// Gentle wheel')];p.write_text(s)

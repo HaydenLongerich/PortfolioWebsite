@@ -1,0 +1,28 @@
+from pathlib import Path
+import html,re,json
+r=Path('work/apex/dist')
+def tool(name,key,description,accent,mark=None):return dict(name=name,key=key,description=description,accent=accent,mark=mark)
+groups=[
+('I','Languages','languages',[
+ tool('TypeScript','typescript','Typed web applications, including Cortex and altF4 invest.','#5ea8ef'),tool('JavaScript','javascript','Interactive web interfaces and application logic.','#f0d84f'),tool('Python','python','Scripting and working with Python libraries such as requests.','#75aedd'),tool('Java','java','Object-oriented development and desktop applications.','#ed925a'),tool('C','c','Low-level programming and working closer to the machine.','#9aaed7'),tool('C++','cpp','Compiled applications and object-oriented programming.','#79a6dd'),tool('SQL','sql','Querying and working with structured data.','#98c9e7','database')]),
+('II','Frontend','web',[
+ tool('React','react','Component-based interfaces in Cortex and altF4 invest.','#6ddaf4'),tool('Next.js','nextjs','The application framework behind Cortex and altF4 invest.','#e9eee9'),tool('Tailwind CSS','tailwind','Utility-first styling, including the Cortex interface.','#66dddb'),tool('HTML','html','The structure and semantics behind web pages.','#ed8763'),tool('CSS','css','Responsive layouts, styling, and interface details.','#7ca9ee'),tool('JavaFX','javafx','Building desktop user interfaces in Java.','#ed996d','FX')]),
+('III','Backend & data','web',[
+ tool('Node.js','nodejs','JavaScript tooling and server-side application development.','#8ccf78'),tool('Supabase','supabase','Application data and authentication in my featured projects.','#65daa6'),tool('requests','requests','Making HTTP requests from Python.','#a5c8de','r[ ]')]),
+('IV','Developer tools','workflow',[
+ tool('Git','git','Version control for tracking changes and collaborating.','#ee8a73'),tool('VS Code','vscode','An editor for working across my web and software projects.','#67b9ef'),tool('IntelliJ IDEA','intellij','A development environment for Java projects.','#e793d9'),tool('CLion','clion','A development environment for C and C++ projects.','#76d6bc')]),
+('V','AI & automation','workflow',[
+ tool('Claude','claude','AI integration in Cortex’s shared-context workspace.','#d7a486'),tool('Excel','excel','Finance workflow automation at Arguson Projects.','#62c893'),tool('VBA','vba','Building Excel macros to automate repetitive finance tasks.','#83d5ac','VBA')])]
+parts=[]
+for roman,label,group,items in groups:
+ cells=[]
+ for t in items:
+  attrs=f'data-tool="{html.escape(t["name"],quote=True)}" data-description="{html.escape(t["description"],quote=True)}" style="--tool-color:{t["accent"]}"'
+  if t['mark']=='database':icon='<svg class="tool-logo sql-logo" viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="9" rx="12" ry="5"/><path d="M8 9v21c0 7 24 7 24 0V9M8 19c0 7 24 7 24 0M8 29c0 7 24 7 24 0"/></svg>'
+  elif t['mark']:icon=f'<span class="tool-monogram" aria-hidden="true">{t["mark"]}</span>'
+  else:icon=f'<img class="tool-logo logo-{t["key"]}" src="assets/tool-icons/{t["key"]}.svg" width="36" height="36" alt="" loading="lazy" decoding="async">'
+  cells.append(f'<li><button type="button" class="tool-tile" {attrs} aria-pressed="false">{icon}<span>{html.escape(t["name"])}</span></button></li>')
+ parts.append(f'<section class="tool-group group-{group}" data-tool-group="{group}" aria-label="{label}"><div class="tool-group-head"><h2><span>{roman}</span>{label}</h2><span>{len(items):02}</span></div><ul class="tool-cells">'+''.join(cells)+'</ul></section>')
+section='''<section id="tools" class="tooling-page"><div class="tooling-intro"><p class="eyebrow">03 / THE TOOLBOX</p><h1>My Tooling<span>.</span></h1><p class="tooling-lead">The tools I use to build software, shape interfaces, and automate the repetitive stuff.</p><div class="tooling-detail" aria-live="polite" aria-atomic="true"><span class="detail-kicker">IN PRACTICE</span><h2 id="toolDetailName">From code to creation.</h2><p id="toolDetailText">Select a tool to see where it fits into my work.</p></div><div class="tooling-tally"><strong>23</strong><div><span>TOOLS & TECHNOLOGIES</span><p>Across projects, development,<br>and real-world automation.</p></div></div></div><div class="tooling-board"><div class="tooling-toolbar"><span>THE WORKING SET</span><div class="tooling-filters" role="group" aria-label="Filter tooling"><button type="button" data-tool-filter="all" aria-pressed="true">All <small>23</small></button><button type="button" data-tool-filter="languages" aria-pressed="false">Languages</button><button type="button" data-tool-filter="web" aria-pressed="false">Web</button><button type="button" data-tool-filter="workflow" aria-pressed="false">Workflow</button></div></div><div class="tooling-groups">'''+''.join(parts)+'''</div><div class="tooling-board-foot"><span id="toolFilterCount" aria-live="polite">23 tools · 5 categories</span><span>Always building. Always learning.</span></div></div></section>'''
+p=r/'tools.html';s=p.read_text(encoding='utf-8');a=s.index('<main>');b=s.index('<footer>',a);s=s[:a]+'<main>'+section+s[b:];s=s.replace('Hayden Longerich — Tooling. This section is under development.','Hayden Longerich — languages, frameworks, and tools I use to build software and automate workflows.');s=s.replace('</body>','<script src="tooling.js?v=tooling19" defer></script></body>');s=re.sub(r'pages.css\?v=[^"\s]+','pages.css?v=tooling19',s);p.write_text(s,encoding='utf-8')
+Path('work/performance/tooling-evidence.json').write_text(json.dumps({'source':'assets/Hayden-Longerich-Resume.pdf','groups':[{'name':label,'tools':[t['name'] for t in items]} for _,label,_,items in groups]},indent=2),encoding='utf-8')

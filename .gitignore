@@ -1,0 +1,17 @@
+
+# Private documents and local credentials
+/work/apex/private/
+**/.env
+**/.env.*
+!**/.env.example
+# Regenerable local outputs and dependencies
+/outputs/
+**/node_modules/
+**/__pycache__/
+**/.wrangler/
+*.log
+.DS_Store
+Thumbs.db
+
+/work/ldraw/
+*.zip

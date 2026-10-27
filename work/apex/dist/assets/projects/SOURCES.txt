@@ -1,0 +1,10 @@
+User-supplied project media, saved locally for this portfolio.
+Cortex app screenshots (cortex-1 through cortex-5): https://devpost.com/software/cortex-yv9awn
+SOON event photos and dashboard screenshot (soon-1 through soon-5): https://lnkd.in/p/gEy7v2Kw
+Student Advisory System screenshots (advisory-1 through advisory-5): https://lnkd.in/p/gBkqGXBv
+altF4 invest screenshots (invest-1 through invest-8): https://devpost.com/software/alt-f4-invest
+BridgeLink Group logo (bridgelink-logo.webp): https://bridgelink-group.com/images/logotransparent.png
+Company and technology details: https://bridgelink-group.com/
+
+BridgeLink real browser screenshots: bridgelink-home.jpg — https://bridgelink-group.com/; bridgelink-company.jpg — https://bridgelink-group.com/who-we-are.html; bridgelink-coverage.jpg — https://bridgelink-group.com/geographical-locations.html
+BridgeLink project year (2025) and role supplied by Hayden Longerich

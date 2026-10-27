@@ -1,0 +1,3 @@
+from pathlib import Path
+p=Path('work/apex/dist/experience.js');s=p.read_text(encoding='utf-8');s=s.replace('float flow=sin(p.x*5.5+p.z*3.0+sin(p.y*6.0+p.x*2.5)*1.4);','vec2 curl=p.xz*3.0; curl+=sin(curl.yx*1.5+vec2(.8,2.3))*.85; float flow=sin(curl.x*2.0+sin(curl.y*2.0)*1.5+sin(p.y*4.0));');p.write_text(s,encoding='utf-8')
+p=Path('outputs/apex-garage/README.txt');s=p.read_text(encoding='utf-8');s=s.replace('Move across the car to steer the flowing swirl beneath it. No X-ray or wireframe overlay.','Move across the car to reveal a flowing lime-and-black finish directly on the paint.\nThe liquid mask trails the pointer and fades back to the base coat.\nNo floor swirl, X-ray or wireframe overlay.');p.write_text(s,encoding='utf-8')

@@ -1,0 +1,3 @@
+Devicon v2.16.0 tool marks: https://github.com/devicons/devicon (MIT).
+Claude: Simple Icons v15.0.0. Excel: Simple Icons v11.0.0. https://simpleicons.org (CC0).
+Brand marks belong to their respective owners.

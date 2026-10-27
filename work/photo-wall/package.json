@@ -1,0 +1,1 @@
+{"name":"portfolio-photo-wall","private":true,"type":"module","scripts":{"build":"node build.mjs"},"dependencies":{"react":"^19.2.0","react-dom":"^19.2.0","framer-motion":"^12.23.0"},"devDependencies":{"esbuild":"^0.25.0","tailwindcss":"^4.1.0","@tailwindcss/cli":"^4.1.0"}}

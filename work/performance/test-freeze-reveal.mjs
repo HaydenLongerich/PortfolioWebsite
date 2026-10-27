@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+const source=fs.readFileSync('work/apex/dist/experience.js','utf8');
+const helpers=source.slice(source.indexOf('function captureReveal()'),source.indexOf("host.addEventListener('contextmenu'"));
+const vector=(x,y)=>({x,y,set(x,y){this.x=x;this.y=y;return this}});
+const context=vm.createContext({uniforms:{uPoint:{value:vector(.8,.3)},uTail:{value:vector(.7,.4)},uStrength:{value:.76},uFlow:{value:2.4}},camera:{aspect:2},host:{getBoundingClientRect(){return {}}},lock:{setAttribute(){},textContent:''},wake(){},hint(){},finishEntrance(){},locate(){},inside:true,locked:false,frozen:false,savedReveal:null,entranceRunning:false,px:.5,py:.5,sx:.5,sy:.5,rect:null});
+vm.runInContext(helpers,context);
+vm.runInContext('holdReveal(false)',context);
+assert.equal(context.frozen,true);assert.equal(context.uniforms.uPoint.value.x,.8);assert.equal(context.uniforms.uStrength.value,.76);
+vm.runInContext('inside=false;holdReveal(true)',context);
+assert.equal(context.locked,true);assert.equal(context.frozen,false);assert.equal(context.uniforms.uTail.value.x,.7);assert.equal(context.uniforms.uPoint.value.x,.8);
+vm.runInContext('resumeReveal()',context);assert.equal(context.locked,false);assert.equal(context.frozen,false);
+vm.runInContext('uniforms.uPoint.value.set(.1,.1);uniforms.uStrength.value=0;holdReveal(true)',context);
+assert.equal(context.uniforms.uPoint.value.x,.8);assert.equal(context.uniforms.uStrength.value,.76);
+assert.ok(!source.includes('if(locked&&!inside)px=py=.5'));
+assert.ok(source.includes("host.addEventListener('contextmenu'"));
+console.log('PASS: frozen reveal keeps exact position/strength/tail, Lock preserves the freeze, resume releases it, and locking after pointer exit restores the last reveal');

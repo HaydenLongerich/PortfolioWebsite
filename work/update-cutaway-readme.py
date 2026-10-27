@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path('outputs/apex-garage/README.txt');s=p.read_text(encoding='utf-8');s=s.replace('Move across the car to reveal a flowing lime-and-black finish directly on the paint.\nThe liquid mask trails the pointer and fades back to the base coat.','Move across the car to open a smooth cutaway through the bodywork.\nThe cutaway reveals illustrative 3D engine, exhaust, chassis, radiator and suspension parts.\nThe continuously interpolated mask stays stable when the cursor is stationary.');p.write_text(s,encoding='utf-8')

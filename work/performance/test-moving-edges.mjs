@@ -1,0 +1,13 @@
+import fs from 'node:fs';import vm from 'node:vm';import assert from 'node:assert/strict';
+let time=100,next=0;const frames=new Map(),events={};
+class El{constructor(tag='button'){this.tagName=tag;this.nodeType=1;this.isConnected=true;this.children=[];this.clientWidth=180;this.clientHeight=50;this.dataset={};this.attrs={};this.props={};this.style={setProperty:(k,v)=>this.props[k]=v};this.classes=new Set();this.classList={add:n=>this.classes.add(n),remove:n=>this.classes.delete(n),contains:n=>this.classes.has(n),toggle:(n,v)=>v?this.classes.add(n):this.classes.delete(n)};}append(n){this.children.push(n)}setAttribute(k,v){this.attrs[k]=v}matches(){return false}closest(){return this.classes.has('edge-surface')?this:null}}
+const tile=new El(),reduced={matches:false,addEventListener:(n,f)=>events.reduced=f};
+const context={document:{hidden:false,body:new El('body'),querySelectorAll:()=>[tile],createElementNS:(_,t)=>new El(t),addEventListener:(n,f)=>events[n]=f},window:{addEventListener:(n,f)=>events[n]=f},getComputedStyle:()=>({position:'static',borderTopLeftRadius:'25px'}),matchMedia:()=>reduced,performance:{now:()=>time},requestAnimationFrame:f=>{frames.set(++next,f);return next},cancelAnimationFrame:id=>frames.delete(id),ResizeObserver:class{observe(){}unobserve(){}},IntersectionObserver:class{observe(){}unobserve(){}},MutationObserver:class{observe(){}}};
+vm.runInNewContext(fs.readFileSync('work/apex/dist/edge-effects.js','utf8'),context);
+const rect=tile.children[0].children.at(-1),first=Number(rect.attrs['stroke-dashoffset']);assert.equal(frames.size,0);
+events.pointerover({pointerType:'mouse',target:tile});assert.equal(frames.size,1);function step(){time+=16.67;const jobs=[...frames.values()];frames.clear();jobs.forEach(f=>f(time))}step();const moved=Number(rect.attrs['stroke-dashoffset']);assert.ok(moved<first);step();assert.ok(Number(rect.attrs['stroke-dashoffset'])<moved);
+assert.equal(tile.children[0].attrs.viewBox,'0 0 180 50');assert.ok(Number(rect.attrs.x)-3.2/2>=0);assert.ok(Number(rect.attrs.y)-3.2/2>=0);assert.ok(Number(rect.attrs.x)+Number(rect.attrs.width)+3.2/2<=tile.clientWidth);assert.ok(Number(rect.attrs.rx)<=Number(rect.attrs.height)/2);
+const segments=tile.children[0].children;assert.equal(segments.length,24);assert.ok(Number(segments[0].props['--segment-alpha'])<Number(segments.at(-1).props['--segment-alpha']));
+events.pointerout({relatedTarget:null});assert.equal(frames.size,0);assert.equal(tile.classes.has('edge-hover'),false);
+reduced.matches=true;events.pointerover({pointerType:'mouse',target:tile});assert.equal(frames.size,0);
+console.log('PASS: actual stroke positions advance across frames, 24-step tail fades, no idle loop after hover, reduced motion respected.');
